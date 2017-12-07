@@ -2,10 +2,9 @@ const { setTimout } = require('timers');
 
 // Ideally, you'd add parsers here to expand data requests
 // They need to be promises for the sake of service scheduler
-const mtaServiceFetcher = require('../parsers/mta').mta.serviceParser.fetchServiceStatus;
+const mtaServiceFetcher = require('../parsers').mta.serviceParser.fetchServiceStatus;
 
 // Keys and fetchers need to maintain a 1 to 1 ratio to maintain data organization
-const FETCHERS = [mtaServiceFetcher]
 const SUBS = ['mta']
 
 // TBD for when API also handles real-time data
@@ -30,7 +29,8 @@ const initialize = () => {
 };
 
 const _serviceScheduler = () => {
-  Promise.all(FETCHERS)
+  // Invoke fetcher promises here
+  Promise.all([mtaServiceFetcher()])
   .then((results) => {
     results.forEach((el, i) => {
       _instance.service[SUBS[i]] = el;
@@ -70,6 +70,7 @@ const _serviceScheduler = () => {
 // };
 
 const getServiceData = (sub) => {
+  console.log(_instance);
   if (!_instance.service || !_instance.service[sub]) { return false; }
   return _instance.service[sub];
 };

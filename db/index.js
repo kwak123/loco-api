@@ -1,4 +1,4 @@
-const db = require('./config');
+const connection = require('./config');
 const util = require('../lib/util');
 
 // Add new fetchers here
@@ -112,21 +112,21 @@ const _insertStopTimes = (sub, data) => new Promise((resolve, reject) => {
 });
 
 const _insertStops = (sub, data) => new Promise((resolve, reject) => {
-  connection.query(INSERT_INTO_STOPS, [data], (error, result) => {
+  connection.query(_insertIntoStopsQuery(sub), [data], (error, result) => {
     if (error) { return reject(error); }
     resolve(result);
   });
 });
 
 const _insertRoutes = (sub, data) => new Promise((resolve, reject) => {
-  connection.query(INSERT_INTO_ROUTES, [data], (error, result) => {
+  connection.query(_insertIntoRoutesQuery(sub), [data], (error, result) => {
     if (error) { return reject(error); }
     resolve(result);
   });
 });
 
 const _insertStopRoutes = (sub) => new Promise((resolve, reject) => {
-  connection.query(CREATE_STOPROUTES, (error, result) => {
+  connection.query(_createStopRoutesQuery(sub), (error, result) => {
     if (error){ return reject(error); }
     resolve(result);
   });
@@ -136,7 +136,7 @@ const _insertStopRoutes = (sub) => new Promise((resolve, reject) => {
 const updateSchedule = (sub) => new Promise((resolve, reject) => {
   if (!sub || !sub.length || typeof sub !== 'string') { return null; }
   if (!PARSERS[sub]) { return null; }
-  let data;
+  console.log('update');
   PARSERS[sub].getAll()
   .then((parsedData) => {
     if (!parsedData.stoptimes.length) { throw 'Error parsing stoptimes'; }
@@ -162,7 +162,7 @@ const updateSchedule = (sub) => new Promise((resolve, reject) => {
 
 const getTimesByStop = (sub, stopId) => new Promise((resolve, reject) => {
   let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `stop_id` = ?';
-  connection.query(query, [stopId, routeType], (error, result) => {
+  connection.query(query, stopId, (error, result) => {
     if (error) { return reject(error); }
     util.sortByTime(result);
     resolve(result);
@@ -182,7 +182,7 @@ const getTimesByStopAndRoute = (sub, stopId, routeId) => new Promise((resolve, r
   let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `stop_id` = ? AND `route_id` = ?'
   connection.query(query, [stopId, routeId], (error, result) => {
     if (error) { return reject(error); }
-    util.timeSort(result);
+    util.sortByTime(result);
     resolve(result);
   });
 });
