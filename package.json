@@ -1,0 +1,34 @@
+{
+  "name": "loco-api",
+  "version": "1.0.0",
+  "description": "API for handling transit and complaint data and returning it in a standardized format",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwak123/loco-api.git"
+  },
+  "author": "Samuel Kwak, Christine Kong, Uciel Vilchis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwak123/loco-api/issues"
+  },
+  "homepage": "https://github.com/kwak123/loco-api#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.5"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "node": "^9.2.0",
+    "path": "^0.12.7",
+    "protobufjs": "^6.8.3",
+    "xml2js": "^0.4.19"
+  }
+}
