@@ -70,13 +70,13 @@ const _serviceScheduler = () => {
 // };
 
 const getServiceData = (sub) => {
-  if (!_instance.serviceData) { return false; }
-  return _instance.serviceData[sub];
+  if (!_instance.service || !_instance.service[sub]) { return false; }
+  return _instance.service[sub];
 };
 
 const getServiceRouteData = (sub, routeId) => {
-  if (!_instance.serviceData) { return false; }
-  return _instance.serviceData[sub].lines.find((a) => a.name.includes(routeId));
+  if (!_instance.service) { return false; }
+  return _instance.service[sub].lines.find((a) => a.name.includes(routeId));
 };
 
 module.exports = {

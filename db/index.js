@@ -160,8 +160,8 @@ const updateSchedule = (sub) => new Promise((resolve, reject) => {
   });
 });
 
-const getScheduleByStop = (sub, stopId, routeType = 'WKD') => new Promise((resolve, reject) => {
-  let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `stop_id` = ? AND `route_type` = ?';
+const getTimesByStop = (sub, stopId) => new Promise((resolve, reject) => {
+  let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `stop_id` = ?';
   connection.query(query, [stopId, routeType], (error, result) => {
     if (error) { return reject(error); }
     util.sortByTime(result);
@@ -169,18 +169,18 @@ const getScheduleByStop = (sub, stopId, routeType = 'WKD') => new Promise((resol
   });
 });
 
-const getScheduleByRoute = (sub, routeId, routeType = 'WKD') => new Promise((resolve, reject) => {
-  let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `route_id` = ? AND `route_type` = ?';
-  connection.query(query, [routeId, routeType], (error, result) => {
+const getTimesByRoute = (sub, routeId) => new Promise((resolve, reject) => {
+  let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `route_id` = ?';
+  connection.query(query, routeId, (error, result) => {
     if (error) { return reject(error); }
     util.sortByTime(result);
     resolve(result);
   });
 });
 
-const getScheduleByStopAndRoute = (sub, stopId, routeId, routeType = 'WKD') => new Promise((resolve, reject) => {
-  let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `stop_id` = ? AND `route_id` = ? AND `route_type` = ?'
-  connection.query(query, [stopId, routeId, routeType], (error, result) => {
+const getTimesByStopAndRoute = (sub, stopId, routeId) => new Promise((resolve, reject) => {
+  let query = 'SELECT * FROM `' +sub+ '_stop_times` WHERE `stop_id` = ? AND `route_id` = ?'
+  connection.query(query, [stopId, routeId], (error, result) => {
     if (error) { return reject(error); }
     util.timeSort(result);
     resolve(result);
@@ -230,9 +230,9 @@ const getStopsByRoute = (sub, routeId) => new Promise ((resolve, reject) => {
 
 module.exports = {
   updateSchedule,
-  getScheduleByStop,
-  getScheduleByRoute,
-  getScheduleByStopAndRoute,
+  getTimesByStop,
+  getTimesByRoute,
+  getTimesByStopAndRoute,
   getStops,
   getStop,
   getRoutes,
