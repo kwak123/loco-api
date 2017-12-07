@@ -28,5 +28,7 @@ app.use(checkSub);
 // Initialize routes
 app.use('/', router);
 
+instance.initialize();
+
 let port = process.env.port || 3001;
 app.listen(port, () => console.log(`now listening on ${port}`));

@@ -53,11 +53,16 @@ router.get('/loco/times/stoproute', controller.times.timesByStopRoute);
 
 // Get all service data for a particular sub
 // e.g. /loco/service?sub=mta
-router.get('/api/service', controller.service.getService);
+router.get('/loco/service', controller.service.getService);
 
 // Get all service data by route_id for a particular sub
 // e.g. /loco/service/route?sub=mta&route_id=7
-router.get('/api/service/route', controller.service.getServiceByRoute);
+router.get('/loco/service/route', controller.service.getServiceByRoute);
+
+
+
+/* Priviliged routes */
+router.get('/loco/privileged/updatedb', controller.admin.updateDB);
 
 module.exports = {
   router

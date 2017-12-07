@@ -15,7 +15,7 @@ const timesByStop = (req, res) => {
 
 const timesByRoute = (req, res) => {
   let sub = req.query.sub;
-  let routeId = req.query.routeId;
+  let routeId = req.query.route_id;
   db.getTimesByRoute(sub, routeId)
   .then((result) => {
     res.send(result);
