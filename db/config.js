@@ -3,6 +3,7 @@ const keys = require('../env/key');
 
 const connection = mysql.createConnection({
   host: keys.DB_HOST,
+  port: keys.DB_PORT,  
   database: keys.DB_NAME, // Change this
   user: keys.DB_USER,
   password: keys.DB_PASSWORD
