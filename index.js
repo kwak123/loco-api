@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./db');
 const instance = require('./instance');
 const router = require('./router').router;
+const { PORT } = require('./env/key');
 
 const app = express();
 
@@ -30,5 +31,4 @@ app.use('/', router);
 
 instance.initialize();
 
-let port = process.env.port || 3001;
-app.listen(port, () => console.log(`now listening on ${port}`));
+app.listen(PORT, () => console.log(`now listening on ${PORT}`));
