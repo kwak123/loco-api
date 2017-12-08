@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const keys = require('../env/key');
 
 const connection = mysql.createConnection({
+  host: keys.DB_HOST,
   database: keys.DB_NAME, // Change this
   user: keys.DB_USER,
   password: keys.DB_PASSWORD
