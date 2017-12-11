@@ -16,13 +16,13 @@ const controller = require('../controller');
 // e.g. /loco/stops?sub=mta
 router.get('/loco/stops', controller.stops.getStops);
 
+// Get all stops by route id for a particular sub
+// e.g. /loco/stop/route?sub=mta&route_id=7
+router.get('/loco/stops/routes', controller.stops.getStopsByRoute);
+
 // Get a stop by stop_id for a particular sub
 // e.g. /loco/stop?sub=mta&stop_id=101N
 router.get('/loco/stop', controller.stops.getStop);
-
-// Get all stops by route id
-// e.g. /loco/stop/route?sub=mta&route_id=7
-router.get('/loco/', controller.stops.getStopsByRoute);
 
 
 
