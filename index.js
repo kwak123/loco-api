@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const db = require('./db');
 const instance = require('./instance');
 const router = require('./router').router;
@@ -25,10 +26,9 @@ const checkSub = (req, res, next) => {
 
 app.use(logger);
 app.use(checkSub);
+app.use(bodyParser.json());
 
 // Initialize routes
 app.use('/', router);
-
-instance.initialize();
 
 app.listen(PORT, () => console.log(`now listening on ${PORT}`));
