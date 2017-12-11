@@ -9,11 +9,16 @@ const controller = require('../controller');
  */
 
 
+ 
 /* Stops */
 
 // Get all available stops for a particular sub
 // e.g. /loco/stops?sub=mta
 router.get('/loco/stops', controller.stops.getStops);
+
+// Get all stops by route id for a particular sub
+// e.g. /loco/stop/route?sub=mta&route_id=7
+router.get('/loco/stops/routes', controller.stops.getStopsByRoute);
 
 // Get a stop by stop_id for a particular sub
 // e.g. /loco/stop?sub=mta&stop_id=101N
@@ -44,7 +49,7 @@ router.get('/loco/times/stop', controller.times.timesByStop);
 router.get('/loco/times/route', controller.times.timesByRoute);;
 
 // Get times by stop_id and route_id for a particular sub
-// e.g. /loco/times/stop?sub=mta&stop_id=101N&route_id=7
+// e.g. /loco/times/stop?sub=mta&stop_id=101N&route_id=1
 router.get('/loco/times/stoproute', controller.times.timesByStopRoute);
 
 
