@@ -7,7 +7,7 @@ const { PORT } = require('./env/key');
 
 const app = express();
 
-// All currently supported trainlines would go in here
+// All currently supported trainlines go in here
 const ALLOWED = ['mta']; 
 
 // Lightweight logger
@@ -17,12 +17,7 @@ const logger = (req, res, next) => {
 };
 
 // Every request needs a sub specified
-const checkSub = (req, res, next) => {
-  if (!ALLOWED.includes(req.query.sub)) {
-    return res.sendStatus(404);
-  }
-  next();
-};
+const checkSub = (req, res, next) => ALLOWED.includes(req.query.sub) ? next() : res.sendStatus(404);
 
 app.use(logger);
 app.use(checkSub);
