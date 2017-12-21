@@ -24,6 +24,8 @@ router.get('/loco/stops/routes', controller.stops.getStopsByRoute);
 // e.g. /loco/stop?sub=mta&stop_id=101N
 router.get('/loco/stop', controller.stops.getStop);
 
+router.get('/loco/stop/coords', controller.stops.getStopsByCoords);
+
 
 
 /* Routes */

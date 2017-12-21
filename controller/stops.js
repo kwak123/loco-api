@@ -1,4 +1,5 @@
 const db = require('../db');
+const geodist = require('geodist');
 
 const getStops = (req, res) => {
   let sub = req.query.sub;
@@ -38,8 +39,30 @@ const getStopsByRoute = (req, res) => {
   });
 };
 
+const getStopsByCoords = (req, res) => {
+  let sub = req.query.sub;
+  let lat = req.query.lat;
+  let lon = req.query.lon;
+  db.getStopsByCoords(sub)
+  .then((data) => {
+    let stops = data.reduce((acc, stop) => {
+      let currentLat = Number(stop.stop_lat);
+      let currentLon = Number(stop.stop_lon);
+      let distance = geodist({ lat, lon }, { lat: currentLat, lon: currentLon });
+      if (distance <= 0.5) { acc.push(stop); }
+      return acc;
+    }, []);
+    res.send(stops);
+  })
+  .catch((error) => {
+    console.log(error);
+    res.sendStatus(404);
+  });
+};
+
 module.exports = {
   getStops,
   getStop,
-  getStopsByRoute
+  getStopsByRoute,
+  getStopsByCoords
 };
