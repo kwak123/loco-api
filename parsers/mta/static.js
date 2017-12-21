@@ -31,26 +31,23 @@ const _getStops = () => new Promise((resolve, reject) => {
  */
 const _getStopTimes = () => new Promise ((resolve, reject) => {
   fs.readFile(__dirname + '/static/stop_times.txt', 'utf8', (err, content) => {
-    if (err) {
-      reject(err);
-    } else {
-      content = content.split('\n').slice(0, -1);
-      const keys = content.shift().split(',');
-      const parsed = [];
-      content.forEach((el) => {
-        let vals = el.split(',');
-        if (!vals[0].includes('GS')) { // Don't want shuttles
-          // 0 = trip_id, 1 = arrival_time, 4 = stop_id
-          let tripArray = vals[0].split('_');
-          let routeId = tripArray[2].split('.')[0];
-          let routeType = tripArray[0].slice(-3);
-          let arrivalTime = vals[1];
-          let stopId = vals[3];
-          parsed.push([routeId, routeType, arrivalTime, stopId]);
-        }
-      });
-      resolve(parsed);
-    }
+    if (err) { return reject(err); }
+    content = content.split('\n').slice(0, -1);
+    const keys = content.shift().split(',');
+    const parsed = [];
+    content.forEach((el) => {
+      let vals = el.split(',');
+      if (!vals[0].includes('GS')) { // Don't want shuttles
+        // 0 = trip_id, 1 = arrival_time, 4 = stop_id
+        let tripArray = vals[0].split('_');
+        let routeId = tripArray[2].split('.')[0];
+        let routeType = tripArray[0].slice(-3);
+        let arrivalTime = vals[1];
+        let stopId = vals[3];
+        parsed.push([routeId, routeType, arrivalTime, stopId]);
+      }
+    });
+    resolve(parsed);
   });
 });
 
@@ -59,21 +56,18 @@ const _getStopTimes = () => new Promise ((resolve, reject) => {
  */
 const _getRoutes = () => new Promise ((resolve, reject) => {
   fs.readFile(__dirname + '/static/routes.txt', 'utf8', (err, content) => {
-    if (err) {
-      reject(err)
-    }  else {
-      content = content.split('\n').slice(0, -1);
-      const keys = content.shift().split(',');
-      content = content.map((a) => a.split(/,(?!\s)/)); // Clean up routes text
-      const parsed = [];
-      content.forEach((el) => {
-        // 0 = route_id, 4 = route_desc
-        let routeId = el[0];
-        let routeDesc = el[4].replace(/\"/g, '');
-        parsed.push([routeId, routeDesc]);
-      });
-      resolve(parsed);
-    }
+    if (err) { return reject(err) }
+    content = content.split('\n').slice(0, -1);
+    const keys = content.shift().split(',');
+    content = content.map((a) => a.split(/,(?!\s)/)); // Clean up routes text
+    const parsed = [];
+    content.forEach((el) => {
+      // 0 = route_id, 4 = route_desc
+      let routeId = el[0];
+      let routeDesc = el[4].replace(/\"/g, '');
+      parsed.push([routeId, routeDesc]);
+    });
+    resolve(parsed);
   });
 });
 

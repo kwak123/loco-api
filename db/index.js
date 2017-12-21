@@ -228,6 +228,14 @@ const getStopsByRoute = (sub, routeId) => new Promise ((resolve, reject) => {
   });
 });
 
+const getStopsByCoords = (sub) => new Promise((resolve, reject) => {
+  let query = 'SELECT * FROM `' +sub+ '_stops` s RIGHT JOIN `' +sub+ '_stop_routes` sr ON s.stop_id = sr.stop_id'
+  connection.query(query, (error, result) => {
+    if (error) { return reject(error); }
+    resolve(result);
+  });
+});
+
 module.exports = {
   updateSchedule,
   getTimesByStop,
@@ -237,5 +245,6 @@ module.exports = {
   getStop,
   getRoutes,
   getRoute,
-  getStopsByRoute
+  getStopsByRoute,
+  getStopsByCoords
 };
