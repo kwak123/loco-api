@@ -49,7 +49,7 @@ const getStopsByCoords = (req, res) => {
       let currentLat = Number(stop.stop_lat);
       let currentLon = Number(stop.stop_lon);
       let distance = geodist({ lat, lon }, { lat: currentLat, lon: currentLon });
-      if (distance <= 0.5) { acc.push(stop); }
+      if (distance <= 0.3) { acc.push(stop); }
       return acc;
     }, []);
     res.send(stops);
