@@ -1,0 +1,4 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+1,TEST,1,1 Test Boulevard,"Train desc example 1",1,http://notarealsite.com,EE352E,
+2,TEST,2,2nd Avenue,"Train desc example 2",1,http://notarealsite.com,EE352E,
+A,TEST,A,3rd Letter Express,"Train desc example 3",1,http://notarealsite.com,EE352E,

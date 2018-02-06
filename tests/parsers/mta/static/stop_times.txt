@@ -1,0 +1,4 @@
+trip_id,arrival_time,departure_time,stop_id,stop_sequence,stop_headsign,pickup_type,drop_off_type,shape_dist_traveled
+B20171105WKD_119450_Q..S16R,20:33:30,20:33:30,D27S,14,,0,0,
+B20171105WKD_119450_Q..S16R,20:35:00,20:35:00,D28S,15,,0,0,
+B20171105WKD_119450_Q..S16R,20:36:30,20:36:30,D29S,16,,0,0,
