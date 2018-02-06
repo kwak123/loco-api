@@ -19,7 +19,7 @@ const _createStopTimesQuery = (sub) => `
     stop_id varchar(10) NOT NULL,
     PRIMARY KEY (id)
   )
-`
+`;
 
 const _createStopsQuery = (sub) => `
   CREATE TABLE ${sub}_stops (
@@ -62,15 +62,15 @@ const _dropTablesQuery = (sub) => `
 
 const _insertIntoStoptimesQuery = (sub) => `
   INSERT INTO ${sub}_stop_times (route_id, route_type, arrival_time, stop_id) VALUES ?
-`
+`;
 
 const _insertIntoStopsQuery = (sub) => `
   INSERT INTO ${sub}_stops (stop_id, stop_name, stop_lat, stop_lon) VALUES ?;
-`
+`;
 
 const _insertIntoRoutesQuery = (sub) => `
   INSERT INTO ${sub}_routes (route_id, route_desc) VALUES ?
-`
+`;
 
 const _dropTables = (sub) => new Promise((resolve, reject) => {
   connection.query(_dropTablesQuery(sub), (error, result) => {
@@ -136,7 +136,6 @@ const _insertStopRoutes = (sub) => new Promise((resolve, reject) => {
 const updateSchedule = (sub) => new Promise((resolve, reject) => {
   if (!sub || !sub.length || typeof sub !== 'string') { return null; }
   if (!PARSERS[sub]) { return null; }
-  console.log('update');
   PARSERS[sub].getAll()
   .then((parsedData) => {
     if (!parsedData.stoptimes.length) { throw 'Error parsing stoptimes'; }
