@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "prep-test": "",
     "start": "node index.js"
   },
   "repository": {
