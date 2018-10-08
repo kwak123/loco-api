@@ -19,16 +19,16 @@
   },
   "homepage": "https://github.com/kwak123/loco-api#readme",
   "devDependencies": {
-    "jest": "^22.1.4",
+    "jest": "^23.6.0",
     "nodemon": "^1.14.11"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "geodist": "^0.2.1",
-    "mysql": "^2.15.0",
-    "node": "^9.4.0",
+    "mysql": "^2.16.0",
+    "node": "^10.11.0",
     "path": "^0.12.7",
     "protobufjs": "^6.8.4",
     "xml2js": "^0.4.19"

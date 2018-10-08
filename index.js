@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const db = require('./db');
 const instance = require('./instance');
 const router = require('./router').router;
-const { PORT } = require('./env/key');
+const { PORT } = require('./env/keys');
 
 const app = express();
 

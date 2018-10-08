@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const keys = require('../env/key');
+const keys = require('../env/keys');
 
 const connection = mysql.createConnection({
   host: keys.DB_HOST,
