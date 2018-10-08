@@ -1,5 +1,5 @@
 const db = require('../db');
-const KEY = require('../env/key').PRIVILEGED_ACCESS;
+const KEY = require('../env/keys').PRIVILEGED_ACCESS;
 
 const updateDB = (req, res) => {
   let sub = req.query.sub;
