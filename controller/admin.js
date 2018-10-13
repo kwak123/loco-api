@@ -11,7 +11,8 @@ const updateDB = (req, res) => {
         console.log(error);
         return res.sendStatus(404);
       });
-  } else {
+  }
+  else {
     res.sendStatus(403);
   }
 };
