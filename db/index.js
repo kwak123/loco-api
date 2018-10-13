@@ -74,7 +74,9 @@ const _insertIntoRoutesQuery = sub => `
 
 const _dropTables = sub => new Promise((resolve, reject) => {
   connection.query(_dropTablesQuery(sub), (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
@@ -82,7 +84,9 @@ const _dropTables = sub => new Promise((resolve, reject) => {
 // Helper method for creating tables
 const _createTable = query => new Promise((resolve, reject) => {
   connection.query(query, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
@@ -100,8 +104,12 @@ const _insertStopTimes = (sub, data) => new Promise((resolve, reject) => {
   const query = (stopsData) => {
     const newData = data.splice(0, 10000);
     connection.query(_insertIntoStoptimesQuery(sub), [newData], (error, result) => {
-      if (error) { return reject(error); }
-      if (stopsData.length) { return query(stopsData); }
+      if (error) {
+        return reject(error);
+      }
+      if (stopsData.length) {
+        return query(stopsData);
+      }
       return resolve(result);
     });
   };
@@ -110,29 +118,39 @@ const _insertStopTimes = (sub, data) => new Promise((resolve, reject) => {
 
 const _insertStops = (sub, data) => new Promise((resolve, reject) => {
   connection.query(_insertIntoStopsQuery(sub), [data], (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
 
 const _insertRoutes = (sub, data) => new Promise((resolve, reject) => {
   connection.query(_insertIntoRoutesQuery(sub), [data], (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
 
 const _insertStopRoutes = sub => new Promise((resolve, reject) => {
   connection.query(_createStopRoutesQuery(sub), (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
 
 // All outward methods below. Requests with invalid subs will receive a null response
 const updateSchedule = sub => new Promise((resolve, reject) => {
-  if (!sub || !sub.length || typeof sub !== 'string') { return null; }
-  if (!PARSERS[sub]) { return null; }
+  if (!sub || !sub.length || typeof sub !== 'string') {
+    return null;
+  }
+  if (!PARSERS[sub]) {
+    return null;
+  }
   let data;
   return PARSERS[sub].getAll()
     .then((parsedData) => {
@@ -147,7 +165,9 @@ const updateSchedule = sub => new Promise((resolve, reject) => {
         error.errorMsg = 'Error parsing routes';
       }
 
-      if (error.errorMsg) { throw error; }
+      if (error.errorMsg) {
+        throw error;
+      }
       data = parsedData;
       return _dropTables(sub);
     })
@@ -173,7 +193,9 @@ const updateSchedule = sub => new Promise((resolve, reject) => {
 const getTimesByStop = (sub, stopId) => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_stop_times` WHERE `stop_id` = ?';
   connection.query(query, stopId, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     util.sortByTime(result);
     return resolve(result);
   });
@@ -182,7 +204,9 @@ const getTimesByStop = (sub, stopId) => new Promise((resolve, reject) => {
 const getTimesByRoute = (sub, routeId) => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_stop_times` WHERE `route_id` = ?';
   connection.query(query, routeId, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     util.sortByTime(result);
     return resolve(result);
   });
@@ -191,7 +215,9 @@ const getTimesByRoute = (sub, routeId) => new Promise((resolve, reject) => {
 const getTimesByStopAndRoute = (sub, stopId, routeId) => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_stop_times` WHERE `stop_id` = ? AND `route_id` = ?';
   connection.query(query, [stopId, routeId], (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     util.sortByTime(result);
     return resolve(result);
   });
@@ -200,7 +226,9 @@ const getTimesByStopAndRoute = (sub, stopId, routeId) => new Promise((resolve, r
 const getStops = sub => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_stops`';
   connection.query(query, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
@@ -208,7 +236,9 @@ const getStops = sub => new Promise((resolve, reject) => {
 const getStop = (sub, stopId) => new Promise((resolve, reject) => {
   const query = 'SELECT * from `' + sub + '_stops` WHERE `stop_id` = ?';
   connection.query(query, stopId, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
@@ -216,7 +246,9 @@ const getStop = (sub, stopId) => new Promise((resolve, reject) => {
 const getRoutes = sub => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_routes`';
   connection.query(query, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
@@ -224,7 +256,9 @@ const getRoutes = sub => new Promise((resolve, reject) => {
 const getRoute = (sub, routeId) => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_routes` WHERE `route_id` = ?';
   connection.query(query, routeId, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });
@@ -232,7 +266,9 @@ const getRoute = (sub, routeId) => new Promise((resolve, reject) => {
 const getStopsByRoute = (sub, routeId) => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_stop_routes` sr INNER JOIN `' + sub + '_stops` s ON sr.stop_id = s.stop_id WHERE route_id = ?';
   connection.query(query, routeId, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     util.sortByDirection(result);
     return resolve(result);
   });
@@ -241,7 +277,9 @@ const getStopsByRoute = (sub, routeId) => new Promise((resolve, reject) => {
 const getStopsByCoords = sub => new Promise((resolve, reject) => {
   const query = 'SELECT * FROM `' + sub + '_stops` s RIGHT JOIN `' + sub + '_stop_routes` sr ON s.stop_id = sr.stop_id';
   connection.query(query, (error, result) => {
-    if (error) { return reject(error); }
+    if (error) {
+      return reject(error);
+    }
     return resolve(result);
   });
 });

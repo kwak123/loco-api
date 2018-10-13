@@ -10,8 +10,10 @@ const connection = mysql.createConnection({
 });
 
 connection.connect((error) => {
-  /* eslint-disable-next-line no-console */
-  if (error) { return console.log(error); }
+  if (error) {
+    /* eslint-disable-next-line no-console */
+    return console.log(error);
+  }
   /* eslint-disable-next-line no-console */
   return console.log(`connected with id ${connection.threadId}`);
 });
