@@ -31,12 +31,16 @@ _serviceScheduler();
 /* Getters */
 
 const getServiceData = (sub) => {
-  if (!_instance.service || !_instance.service[sub]) { return false; }
+  if (!_instance.service || !_instance.service[sub]) {
+    return false;
+  }
   return _instance.service[sub];
 };
 
 const getServiceRouteData = (sub, routeId) => {
-  if (!_instance.service) { return false; }
+  if (!_instance.service) {
+    return false;
+  }
   return _instance.service[sub].lines.find(line => line.name.includes(routeId));
 };
 
