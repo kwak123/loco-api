@@ -4,6 +4,6 @@ const mta = require('./mta');
 module.exports = {
   mta: {
     serviceParser: mta.serviceParser,
-    staticParser: mta.staticParser
-  }
+    staticParser: mta.staticParser,
+  },
 };
