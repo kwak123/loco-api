@@ -1,7 +1,7 @@
 const PUBLIC_URLS = {
-  MTA_SERVICE: 'http://web.mta.info/status/serviceStatus.txt'
+  MTA_SERVICE: 'http://web.mta.info/status/serviceStatus.txt',
 };
 
 module.exports = {
-  PUBLIC_URLS
+  PUBLIC_URLS,
 };
