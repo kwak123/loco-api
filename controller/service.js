@@ -5,7 +5,8 @@ const getService = (req, res) => {
   const data = instance.getServiceData(sub);
   if (data) {
     res.send(data);
-  } else {
+  }
+  else {
     res.sendStatus(404);
   }
 };
@@ -15,7 +16,8 @@ const getServiceByRoute = (req, res) => {
   const data = instance.getServiceRouteData(sub, routeId);
   if (data) {
     res.send(data);
-  } else {
+  }
+  else {
     res.sendStatus(404);
   }
 };

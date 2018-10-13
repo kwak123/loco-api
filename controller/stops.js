@@ -52,7 +52,9 @@ const getStopsByCoords = (req, res) => {
           { lat: currentLat, lon: currentLon },
           { exact: true, unit: 'miles' },
         );
-        if (distance <= 0.5) { acc.push(stop); }
+        if (distance <= 0.5) {
+          acc.push(stop);
+        }
         return acc;
       }, []);
       res.send(stops);
