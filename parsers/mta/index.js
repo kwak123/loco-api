@@ -4,5 +4,5 @@ const staticParser = require('./static');
 // Meta module
 module.exports = {
   serviceParser,
-  staticParser
+  staticParser,
 };
