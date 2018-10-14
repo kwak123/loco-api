@@ -70,3 +70,4 @@ And that's it! After that, read through the routes docs to figure out how you ca
 - [ ] Improve ReadMe documentation
 - [ ] Dedicated domain name for loco-api
 - [ ] Add eslint rules
+- [ ] Better SQL sanity
