@@ -18,4 +18,13 @@ connection.connect((error) => {
   return console.log(`connected with id ${connection.threadId}`);
 });
 
-module.exports = connection;
+module.exports = {
+  query: (...args) => new Promise((resolve, reject) => {
+    connection.query(...args, (error, result) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(result);
+    });
+  }),
+};
