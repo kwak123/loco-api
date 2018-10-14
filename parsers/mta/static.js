@@ -77,7 +77,7 @@ const getAll = (rootPath = __dirname) => new Promise((resolve, reject) => {
     })
     .catch((error) => {
       /* eslint-disable-next-line no-console */
-      console.log('failed in MTA getAll', error);
+      console.error('failed in MTA getAll', error);
       reject(error);
     });
 });

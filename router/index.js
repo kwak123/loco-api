@@ -16,7 +16,7 @@ router.get('/loco/stops', controller.stops.getStops);
 
 // Get all stops by route id for a particular sub
 // e.g. /loco/stop/route?sub=mta&route_id=7
-router.get('/loco/stops/routes', controller.stops.getStopsByRoute);
+router.get('/loco/stops/route', controller.stops.getStopsByRoute);
 
 // Get a stop by stop_id for a particular sub
 // e.g. /loco/stop?sub=mta&stop_id=101N
@@ -49,14 +49,15 @@ router.get('/loco/times/route', controller.times.timesByRoute);
 router.get('/loco/times/stoproute', controller.times.timesByStopRoute);
 
 /* Service Data */
-
+// DYSFUNCTIONAL RIGHT NOW
 // Get all service data for a particular sub
 // e.g. /loco/service?sub=mta
-router.get('/loco/service', controller.service.getService);
+// router.get('/loco/service', controller.service.getService);
 
+// DYSFUNCTIONAL RIGHT NOW
 // Get all service data by route_id for a particular sub
 // e.g. /loco/service/route?sub=mta&route_id=7
-router.get('/loco/service/route', controller.service.getServiceByRoute);
+// router.get('/loco/service/route', controller.service.getServiceByRoute);
 
 /* Priviliged routes */
 router.get('/loco/privileged/updatedb', controller.admin.updateDB);
