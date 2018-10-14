@@ -2,9 +2,15 @@ const connection = require('./config');
 const util = require('../lib/util');
 
 // Query formatters
-const formatKeyList = keyList => keyList
-  .map(key => `WHERE \`${key}\` = ?`)
-  .join(' AND ');
+const formatKeyList = (keyList) => {
+  if (!keyList.length) {
+    return '';
+  }
+  const keyString = keyList
+    .map(key => `\`${key}\` = ?`)
+    .join(' AND ');
+  return `WHERE ${keyString}`;
+};
 
 const formatGetQuery = (sub, tableType, keyList = []) => {
   const subType = `${sub}_${tableType}`;
@@ -74,9 +80,9 @@ const getRoutes = (sub) => {
   return connection.query(queryString);
 };
 
-const getRoute = (sub) => {
+const getRoute = (sub, routeId) => {
   const queryString = formatGetRouteQuery(sub);
-  return connection.query(queryString);
+  return connection.query(queryString, routeId);
 };
 
 const getStopsByRoute = (sub, routeId) => {

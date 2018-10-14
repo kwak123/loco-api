@@ -21,7 +21,7 @@ describe('db get', () => {
 
         it('joins with AND if multiple keys', () => {
           const keyList = ['one', 'two'];
-          const expected = 'WHERE `one` = ? AND WHERE `two` = ?';
+          const expected = 'WHERE `one` = ? AND `two` = ?';
           const result = formatKeyList(keyList);
           expect(result).toEqual(expected);
         });
@@ -66,7 +66,7 @@ describe('db get', () => {
         it('test formatted keys with two keys', () => {
           testKeyList.push('one');
           testKeyList.push('two');
-          const expected = 'SELECT * FROM `mta_stops` WHERE `one` = ? AND WHERE `two` = ?';
+          const expected = 'SELECT * FROM `mta_stops` WHERE `one` = ? AND `two` = ?';
           const result = getFormattedQuery();
           expect(result).toEqual(expected);
         });
@@ -77,55 +77,55 @@ describe('db get', () => {
 
       it('formatGetTimesByStopQuery', () => {
         const expected = 'SELECT * FROM `mta_stop_times` WHERE `stop_id` = ?';
-        const result = get.formatGetTimesByStopQuery(testSub);
+        const result = formatters.formatGetTimesByStopQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetTimesByRouteQuery', () => {
         const expected = 'SELECT * FROM `mta_stop_times` WHERE `route_id` = ?';
-        const result = get.formatGetTimesByRouteQuery(testSub);
+        const result = formatters.formatGetTimesByRouteQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetTimesByStopAndRouteQuery', () => {
-        const expected = 'SELECT * FROM `mta_stop_times` WHERE `stop_id` = ? AND WHERE `route_id` = ?';
-        const result = get.formatGetTimesByStopAndRouteQuery(testSub);
+        const expected = 'SELECT * FROM `mta_stop_times` WHERE `stop_id` = ? AND `route_id` = ?';
+        const result = formatters.formatGetTimesByStopAndRouteQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetStopsQuery', () => {
         const expected = 'SELECT * FROM `mta_stops`';
-        const result = get.formatGetStopsQuery(testSub);
+        const result = formatters.formatGetStopsQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetStopQuery', () => {
         const expected = 'SELECT * FROM `mta_stops` WHERE `stop_id` = ?';
-        const result = get.formatGetStopQuery(testSub);
+        const result = formatters.formatGetStopQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetRoutesQuery', () => {
         const expected = 'SELECT * FROM `mta_routes`';
-        const result = get.formatGetRoutesQuery(testSub);
+        const result = formatters.formatGetRoutesQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetRouteQuery', () => {
         const expected = 'SELECT * FROM `mta_routes` WHERE `route_id` = ?';
-        const result = get.formatGetRouteQuery(testSub);
+        const result = formatters.formatGetRouteQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetStopsByRouteQuery', () => {
         const expected = 'SELECT * FROM `mta_stop_routes` sr INNER JOIN `mta_stops` ON sr.stop_id WHERE route_id = ?';
-        const result = get.formatGetStopsByRouteQuery(testSub);
+        const result = formatters.formatGetStopsByRouteQuery(testSub);
         expect(result).toEqual(expected);
       });
 
       it('formatGetStopsByCoordsQuery', () => {
         const expected = 'SELECT * FROM `mta_stops` s RIGHT JOIN `mta_stop_routes` sr ON s.stop_id = sr.stop_id';
-        const result = get.formatGetStopsByCoordsQuery(testSub);
+        const result = formatters.formatGetStopsByCoordsQuery(testSub);
         expect(result).toEqual(expected);
       });
     });

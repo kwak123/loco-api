@@ -7,7 +7,7 @@ const connection = require('./config');
 /* Queries */
 
 const formatCreateStopTimesQuery = sub => `
-  CREATE TABLE ${sub}stop_times (
+  CREATE TABLE ${sub}_stop_times (
     id int NOT NULL AUTO_INCREMENT,
     route_id varchar(10) NOT NULL,
     route_type varchar(10) NOT NULL,
@@ -119,10 +119,19 @@ const insertStopRoutes = (sub) => {
   return insertData(insertStopRoutesQuery);
 };
 
+const insertAll = (sub, data) => {
+  const { stoptimes, stops, routes } = data;
+  return insertStopTimes(sub, stoptimes)
+    .then(() => insertStops(sub, stops))
+    .then(() => insertRoutes(sub, routes))
+    .then(() => insertStopRoutes(sub));
+};
+
 module.exports = {
   createAllTables,
   insertStopTimes,
   insertStops,
   insertRoutes,
   insertStopRoutes,
+  insertAll,
 };
