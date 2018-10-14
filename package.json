@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/kwak123/loco-api.git"
   },
-  "author": "Samuel Kwak, Christine Kong, Uciel Vilchis",
+  "author": "Samuel Kwak",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kwak123/loco-api/issues"
@@ -30,6 +30,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "eslint-plugin-jest": "^21.24.1",
     "express": "^4.16.2",
     "geodist": "^0.2.1",
     "mysql": "^2.16.0",
