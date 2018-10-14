@@ -32,19 +32,9 @@ const formatGetStopsByRouteQuery = sub => `SELECT * FROM \`${sub}_stop_routes\` 
 
 const formatGetStopsByCoordsQuery = sub => `SELECT * FROM \`${sub}_stops\` s RIGHT JOIN \`${sub}_stop_routes\` sr ON s.stop_id = sr.stop_id`;
 
-// Helpers
-const baseConnectionQuery = (...args) => new Promise((resolve, reject) => {
-  connection.query(...args, (error, result) => {
-    if (error) {
-      return reject(error);
-    }
-    return resolve(result);
-  });
-});
-
 const getTimesByStop = (sub, stopId) => {
   const queryString = formatGetTimesByStopQuery(sub);
-  return baseConnectionQuery(queryString, stopId)
+  return connection.query(queryString, stopId)
     .then((result) => {
       util.sortByTime(result);
       return result;
@@ -53,7 +43,7 @@ const getTimesByStop = (sub, stopId) => {
 
 const getTimesByRoute = (sub, routeId) => {
   const queryString = formatGetTimesByRouteQuery(sub);
-  return baseConnectionQuery(queryString, routeId)
+  return connection.query(queryString, routeId)
     .then((result) => {
       util.sortByTime(result);
       return result;
@@ -62,7 +52,7 @@ const getTimesByRoute = (sub, routeId) => {
 
 const getTimesByStopAndRoute = (sub, stopId, routeId) => {
   const queryString = formatGetTimesByStopAndRouteQuery(sub);
-  return baseConnectionQuery(queryString, [stopId, routeId])
+  return connection.query(queryString, [stopId, routeId])
     .then((result) => {
       util.sortByTime(result);
       return result;
@@ -71,32 +61,32 @@ const getTimesByStopAndRoute = (sub, stopId, routeId) => {
 
 const getStops = (sub) => {
   const queryString = formatGetStopsQuery(sub);
-  return baseConnectionQuery(queryString);
+  return connection.query(queryString);
 };
 
 const getStop = (sub, stopId) => {
   const queryString = formatGetStopQuery(sub);
-  return baseConnectionQuery(queryString, stopId);
+  return connection.query(queryString, stopId);
 };
 
 const getRoutes = (sub) => {
   const queryString = formatGetRoutesQuery(sub);
-  return baseConnectionQuery(queryString);
+  return connection.query(queryString);
 };
 
 const getRoute = (sub) => {
   const queryString = formatGetRouteQuery(sub);
-  return baseConnectionQuery(queryString);
+  return connection.query(queryString);
 };
 
 const getStopsByRoute = (sub, routeId) => {
   const queryString = formatGetStopsByRouteQuery(sub);
-  return baseConnectionQuery(queryString, routeId);
+  return connection.query(queryString, routeId);
 };
 
 const getStopsByCoords = (sub) => {
   const queryString = formatGetStopsByCoordsQuery(sub);
-  return baseConnectionQuery(queryString);
+  return connection.query(queryString);
 };
 
 // Query formatting tools

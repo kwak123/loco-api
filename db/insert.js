@@ -66,34 +66,18 @@ const formatInsertRoutesQuery = sub => `
  * Promise-wraps the connection.query method exposed from mysql lib
  * @param {String} queryString String created using one of the query builders above
  */
-const createTable = queryString => new Promise((resolve, reject) => {
-  connection.query(queryString, (error, result) => {
-    if (error) {
-      return reject(error);
-    }
-    return resolve(result);
-  });
-});
+const createTable = queryString => connection.query(queryString);
 
 /**
  * Promise-wraps the connection.query method exposed from mysql lib
  * @param {String} queryString String created using one of the query builders above
  */
-const insertData = (queryString, data) => new Promise((resolve, reject) => {
-  const callback = (error, result) => {
-    if (error) {
-      return reject(error);
-    }
-    return resolve(result);
-  };
-
+const insertData = (queryString, data) => {
   if (data) {
-    connection.query(queryString, [data], callback);
+    return connection.query(queryString, [data]);
   }
-  else {
-    connection.query(queryString, callback);
-  }
-});
+  return connection.query(queryString);
+};
 
 /* Exposed methods */
 const createAllTables = (sub) => {
