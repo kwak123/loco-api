@@ -21,6 +21,7 @@ const logger = (req, res, next) => {
 };
 
 // Every request needs a sub specified
+// This is used in dynamic table fetching, thankfully hard matching to an expected string should protect against injection
 const checkSub = (req, res, next) => {
   if (ALLOWED.includes(req.query.sub)) {
     return next();
