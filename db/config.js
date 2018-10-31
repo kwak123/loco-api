@@ -9,4 +9,5 @@ knex.raw('SHOW TABLES')
 
 module.exports = {
   query: (...args) => knex.raw(...args),
+  knex,
 };
